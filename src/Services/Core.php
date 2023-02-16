@@ -1,0 +1,38 @@
+<?php
+
+namespace Justrice\API\Services;
+
+use Illuminate\Support\Facades\Http;
+
+class Core
+{
+    private string $url;
+    private string $token;
+
+    public function __construct($url, $token)
+    {
+        $this->url = $url;
+        $this->token = $token;
+    }
+
+    public function getCategories()
+    {
+        return $this->sendRequest('/categories');
+    }
+
+    public function getSubcategories($category_id)
+    {
+        return $this->sendRequest("/categories/{$category_id}/subcategories");
+    }
+
+
+    protected function sendRequest(string $uri, array $data = [], string $method = 'get')
+    {
+        $response = Http::withToken($this->token)->{$method}($this->url . $uri, $data);
+        if ($response->successful()) {
+            return json_decode($response->body());
+        }
+
+        return false;
+    }
+}
