@@ -11,5 +11,20 @@
     ],
     "require": {
         "php": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Justrice\\API\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Justrice\\API\\Providers\\APIServiceProvider"
+            ],
+            "aliases": {
+                "Justrice": "Justrice\\API\\Services\\Core"
+            }
+        }
     }
 }
