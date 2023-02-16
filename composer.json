@@ -1,0 +1,15 @@
+{
+    "name": "justrice-ua/api",
+    "description": "JustRice API Helper",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "augfitzr",
+            "email": "0_pokers_bears@icloud.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    }
+}

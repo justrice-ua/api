@@ -25,6 +25,11 @@ class Core
         return $this->sendRequest("/categories/{$category_id}/subcategories");
     }
 
+    public function getProducts()
+    {
+        return $this->sendRequest('/products');
+    }
+
 
     protected function sendRequest(string $uri, array $data = [], string $method = 'get')
     {
