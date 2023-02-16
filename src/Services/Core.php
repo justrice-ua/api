@@ -2,6 +2,7 @@
 
 namespace Justrice\API\Services;
 
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 
 class Core
@@ -33,11 +34,14 @@ class Core
 
     protected function sendRequest(string $uri, array $data = [], string $method = 'get')
     {
-        $response = Http::withToken($this->token)->{$method}($this->url . $uri, $data);
-        if ($response->successful()) {
-            return json_decode($response->body());
+        try {
+            $response = Http::withToken($this->token)->{$method}($this->url . $uri, $data);
+            if ($response->successful()) {
+                return json_decode($response->body());
+            }
+        } catch (ConnectionException $connectionException){
+            report($connectionException);
         }
 
-        return false;
     }
 }

@@ -14,7 +14,7 @@ class APIServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(Core::class, function (){
-            return new Core('https://example.com','test_token');
+            return new Core(config('justrice.api_url'),config('justrice.api_token'));
         });
     }
 
@@ -25,6 +25,8 @@ class APIServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        $this->publishes([
+            __DIR__.'/../config/justrice.php' => config_path('justrice.php'),
+        ]);
     }
 }
