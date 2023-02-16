@@ -39,6 +39,8 @@ class Core
             if ($response->successful()) {
                 return json_decode($response->body());
             }
+
+            
         } catch (ConnectionException $connectionException){
             report($connectionException);
         }
