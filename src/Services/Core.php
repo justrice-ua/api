@@ -62,7 +62,7 @@ class Core
             $response = Http::withToken($this->token)->acceptJson()->{$method}($this->url . $uri, $data);
             $result = json_decode($response->body(),true);
             if (!$response->successful()) {
-                throw new JustriceException($result['message']);
+                throw new JustriceException($result['message'],$response->status());
             }
 
             return $result['data'];
