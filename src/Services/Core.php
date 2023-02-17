@@ -62,11 +62,11 @@ class Core
             $response = Http::withToken($this->token)->{$method}($this->url . $uri, $data);
             if ($response->successful()) {
                 $result = json_decode($response->body(),true);
-                if($result['success']){
-                    return $result['data'];
+                if(!$result['success']){
+                    throw new JustriceException($result['message']);
                 }
 
-                throw new JustriceException($result['message']);
+                return $result['data'];
             }
         } catch (ConnectionException $connectionException) {
             report($connectionException);
