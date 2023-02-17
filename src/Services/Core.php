@@ -59,17 +59,16 @@ class Core
     protected function sendRequest(string $uri, array $data = [], string $method = 'get')
     {
         try {
-            $response = Http::withToken($this->token)->{$method}($this->url . $uri, $data);
-            if ($response->successful()) {
-                $result = json_decode($response->body(),true);
-                if(!$result['success']){
-                    throw new JustriceException($result['message']);
-                }
-
-                return $result['data'];
+            $response = Http::withToken($this->token)->acceptJson()->{$method}($this->url . $uri, $data);
+            $result = json_decode($response->body(),true);
+            if (!$response->successful()) {
+                throw new JustriceException($result['message']);
             }
+
+            return $result['data'];
         } catch (ConnectionException $connectionException) {
             report($connectionException);
+            dd('test');
         }
     }
 }
