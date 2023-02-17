@@ -41,6 +41,11 @@ class Core
         return $this->sendRequest("/products");
     }
 
+    public function listProducts($subcategory_id)
+    {
+        return $this->sendRequest("/subcategories/{$subcategory_id}/products");
+    }
+
     public function getProduct($product_id)
     {
         return $this->sendRequest("/products/{$product_id}");
