@@ -2,6 +2,6 @@
 
 if(!function_exists('justriceAsset')){
     function justriceAsset($hash){
-        return config('justrice.api_url') . "/asset/{$hash}";
+        return config('justrice.api_url') . "/assets/{$hash}";
     }
 }
