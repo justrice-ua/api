@@ -21,14 +21,29 @@ class Core
         return $this->sendRequest('/categories');
     }
 
-    public function getSubcategories($category_id)
+    public function getCategory($category_id)
+    {
+        return $this->sendRequest("/categories/{$category_id}");
+    }
+
+    public function listSubcategories($category_id)
     {
         return $this->sendRequest("/categories/{$category_id}/subcategories");
     }
 
+    public function getSubcategory($subcategory_id)
+    {
+        return $this->sendRequest("/subcategories/{$subcategory_id}");
+    }
+
     public function getProducts()
     {
-        return $this->sendRequest('/products');
+        return $this->sendRequest("/products");
+    }
+
+    public function getProduct($product_id)
+    {
+        return $this->sendRequest("/products/{$product_id}");
     }
 
 
@@ -37,13 +52,10 @@ class Core
         try {
             $response = Http::withToken($this->token)->{$method}($this->url . $uri, $data);
             if ($response->successful()) {
-                return json_decode($response->body());
+                return json_decode($response->body(), true);
             }
-
-            
-        } catch (ConnectionException $connectionException){
+        } catch (ConnectionException $connectionException) {
             report($connectionException);
         }
-
     }
 }
