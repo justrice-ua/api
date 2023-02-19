@@ -53,6 +53,16 @@ class Core
     }
 
 
+    public function getUser($user_id)
+    {
+        return $this->sendRequest("/users/{$user_id}");
+    }
+
+    public function getUserByPhone($phone)
+    {
+        return $this->sendRequest("/users/auth/{$phone}");
+    }
+
     /**
      * @throws JustriceException
      */
