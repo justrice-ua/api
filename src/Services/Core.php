@@ -64,7 +64,7 @@ class Core
     }
 
     public function checkout($body){
-        $this->sendRequest('/checkout',$body,'post');
+        return $this->sendRequest('/checkout',$body,'post');
     }
 
     /**
