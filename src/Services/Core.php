@@ -76,6 +76,9 @@ class Core
             $response = Http::withToken($this->token)->acceptJson()->{$method}($this->url . $uri, $data);
             $result = json_decode($response->body(),true);
             if (!$response->successful()) {
+                if(env('APP_DEBUG')){
+                    dd($result);
+                }
                 throw new JustriceException($result['message'],$response->status());
             }
 
