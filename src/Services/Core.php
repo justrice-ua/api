@@ -63,6 +63,10 @@ class Core
         return $this->sendRequest("/users/auth/{$phone}");
     }
 
+    public function checkout($body){
+        $this->sendRequest('/checkout',$body,'post');
+    }
+
     /**
      * @throws JustriceException
      */
