@@ -52,6 +52,11 @@ class Core
         return $this->sendRequest("/products/{$product_id}");
     }
 
+    public function getOrderByHash($hash)
+    {
+        return $this->sendRequest("/order/hash/{$hash}");
+    }
+
 
     public function getUser($user_id)
     {
@@ -63,8 +68,9 @@ class Core
         return $this->sendRequest("/users/auth/{$phone}");
     }
 
-    public function checkout($body){
-        return $this->sendRequest('/checkout',$body,'post');
+    public function checkout($body)
+    {
+        return $this->sendRequest('/checkout', $body, 'post');
     }
 
     /**
@@ -74,12 +80,12 @@ class Core
     {
         try {
             $response = Http::withToken($this->token)->acceptJson()->{$method}($this->url . $uri, $data);
-            $result = json_decode($response->body(),true);
+            $result = json_decode($response->body(), true);
             if (!$response->successful()) {
-                if(env('APP_DEBUG')){
+                if (env('APP_DEBUG')) {
                     dd($result);
                 }
-                throw new JustriceException($result['message'],$response->status());
+                throw new JustriceException($result['message'], $response->status());
             }
 
             return $result['data'];
